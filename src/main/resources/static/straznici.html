@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Městská hlídka – Strážníci</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        body{max-width:900px;margin:40px auto;font-family:sans-serif}
+        h1{color:#0056b3}
+        table{width:100%;border-collapse:collapse;margin-top:1rem}
+        th,td{padding:.6rem;border-bottom:1px solid #ddd;text-align:left}
+        th{background:#f0f2f5}
+        tbody tr:hover{background:#fafafa}
+        a{margin-right:1rem}
+    </style>
+</head>
+<body>
+<a href="/" id="back">← Zpět na dashboard</a>
+<h1>Strážníci</h1>
+<table id="strazniciTable">
+    <thead>
+    <tr><th>Jméno</th><th>Hodnost</th><th>Případy</th></tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<script>
+    fetch('/api/straznici/s-pripady', {credentials:'include'})
+        .then(r => {
+            if (r.status === 403) { alert('Přístup jen pro admina'); location.href='/'; return []; }
+            return r.json();
+        })
+        .then(list => {
+            const tbody = document.querySelector('#strazniciTable tbody');
+            if (list.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" style="text-align:center">– žádní strážníci –</td></tr>';
+                return;
+            }
+            list.forEach(s => {
+                const pripady = (s.pripady ?? []).map(p => p.nazev).join(', ');
+                tbody.insertAdjacentHTML('beforeend', `
+               <tr>
+                 <td>${s.jmeno}</td>
+                 <td>${s.hodnost}</td>
+                 <td>${pripady || '-'}</td>
+               </tr>`);
+            });
+        });
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Přihlášení | Městská hlídka</title>
+
+
+    <style>
+        body { font-family: system-ui, sans-serif; background:#f2f5f7; display:flex; height:100vh; align-items:center; justify-content:center; }
+        .login-box { background:white; padding:2rem 2.5rem; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,.15); width:320px; }
+        h1   { font-size:1.4rem; margin-top:0; text-align:center; }
+        label{ display:block; margin-top:1rem; font-size:.9rem; }
+        input{ width:100%; padding:.5rem; font-size:1rem; margin-top:.3rem; border:1px solid #ccc; border-radius:4px; }
+        button{ width:100%; margin-top:1.5rem; padding:.6rem; font-size:1rem; border:none; border-radius:4px; background:#d62828; color:#fff; cursor:pointer; }
+        button:hover{ background:#b71f1f; }
+        .msg { color:#d62828; font-size:.9rem; margin-top:1rem; text-align:center; }
+    </style>
+</head>
+<body>
+<div class="login-box">
+    <h1>Přihlášení</h1>
+
+    <form method="post" action="/login">
+        <label>
+            Uživatelské jméno
+            <input type="text" name="username" autocomplete="username" required />
+        </label>
+
+        <label>
+            Heslo
+            <input type="password" name="password" autocomplete="current-password" required />
+        </label>
+
+        <button type="submit">Přihlásit</button>
+    </form>
+
+    <div id="error" class="msg" hidden>Neplatné uživatelské jméno nebo heslo.</div>
+</div>
+
+<script>
+
+
+    if (new URLSearchParams(window.location.search).has('error')) {
+        document.getElementById('error').hidden = false;
+    }
+</script>
+</body>
+</html>

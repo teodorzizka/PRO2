@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Městská hlídka – Dashboard</title>
+    <link rel="stylesheet" href="/style.css" />
+    <style>
+        header{display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem}
+        #logo{width:46px}
+        h1{margin:0;color:#0056b3}
+        #logout{margin-left:auto;padding:.4rem 1rem;border:1px solid #ccc;border-radius:4px;text-decoration:none}
+        section{margin-bottom:2rem}
+        table{width:100%;border-collapse:collapse;margin-top:1rem}
+        th,td{padding:.6rem;border-bottom:1px solid #ddd;text-align:left}
+        th{background:#f0f2f5}
+        tbody tr:hover{background:#fafafa}
+        form input{margin-right:.4rem}
+    </style>
+
+
+</head>
+<body>
+<header>
+    <h1>Městská hlídka</h1>
+    <span id="userInfo"></span>
+    <a id="logout" href="/logout">Odhlásit se</a>
+</header>
+<section id="pripadySection">
+    <div id="createPripadSection" style="display:none">
+        <h2>Přidat nový případ</h2>
+        <form id="pripadForm">
+            <input name="nazev"  placeholder="Název"  required>
+            <input name="popis"  placeholder="Popis"  required>
+            <button type="submit">Přidat</button>
+        </form>
+    </div>
+    <div id="assignSection" style="display:none">
+        <h2>Přiřadit strážníka k případu</h2>
+        <form id="assignForm">
+            <input name="pripadId"   type="number" placeholder="ID případu"   required>
+            <input name="straznikId" type="number" placeholder="ID strážníka" required>
+            <button type="submit">Přiřadit</button>
+        </form>
+    </div>
+
+    <h2>Případy</h2>
+    <table id="pripadyTable">
+        <thead>
+        <tr><th>ID</th><th>Název</th><th>Popis</th><th>Strážník</th><th>Akce</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</section>
+
+<hr>
+<section id="podezreliSection">
+    <div id="createPodezrelySection" style="display:none">
+        <h2>Přidat podezřelého</h2>
+        <form id="podezrelyForm">
+            <input name="jmeno" placeholder="Jméno" required>
+            <input name="vek"   type="number" min="0" placeholder="Věk">
+            <input name="popis" placeholder="Popis">
+            <button type="submit">Přidat</button>
+        </form>
+    </div>
+    <div id="podezrelyAssignSection" style="display:none">
+        <h2>Přiřadit podezřelého k případu</h2>
+        <form id="podezrelyAssignForm">
+            <input name="podezrelyId" type="number" placeholder="ID podezřelého" required>
+            <input name="pripadId"    type="number" placeholder="ID případu"    required>
+            <button type="submit">📎 Přiřadit</button>
+        </form>
+    </div>
+    <h2>Podezřelí</h2>
+    <table id="podezreliTable">
+        <thead>
+        <tr><th>ID</th><th>Jméno</th><th>Věk</th><th>Popis</th><th>Případ</th><th>Akce</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</section>
+<hr>
+<section id="vyslechySection">
+    <div id="createVyslechSection">
+        <h2>Přidat výslech</h2>
+        <form id="vyslechForm">
+            <input name="podezrelyId" type="number" placeholder="ID podezřelého" required>
+            <input name="zapis" placeholder="Zápis" required>
+            <button type="submit">Přidat výslech</button>
+        </form>
+    </div>
+    <h2>Výslechy</h2>
+    <table id="vyslechyTable">
+        <thead>
+        <tr><th>ID</th><th>Datum</th><th>Zápis</th><th>Podezřelý</th><th>Akce</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</section>
+<hr>
+<section id="strazniciSection">
+    <div id="createStraznikSection" style="display:none">
+        <h2>Přidat strážníka</h2>
+        <form id="straznikForm">
+            <input name="jmeno"   placeholder="Jméno"   required>
+            <input name="hodnost" placeholder="Hodnost" required>
+            <input name="vek"     type="number" min="18" placeholder="Věk">
+            <input name="rasa"    placeholder="Rasa">
+            <button type="submit">➕ Přidat</button>
+        </form>
+    </div>
+
+    <h2>Strážníci</h2>
+    <table id="strazniciTable">
+        <thead>
+        <tr><th>ID</th><th>Jméno</th><th>Hodnost</th><th>Věk</th><th>Rasa</th><th>Akce</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</section>
+<script src="/main.js" defer></script>
+</body>
+</html>
